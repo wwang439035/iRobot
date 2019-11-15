@@ -1,10 +1,10 @@
 import numpy as np
 
 grid_map = [[0, 1, 0, 0, 0, 0],
-            [0, 1, 0, 0, 0, 0],
-            [0, 1, 0, 0, 0, 0],
-            [0, 1, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0]]
+            [0, 1, 0, 0, 1, 0],
+            [0, 1, 0, 1, 1, 0],
+            [0, 1, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0]]
 start = [0, 0]
 end = [len(grid_map) - 1, len(grid_map[0]) - 1]
 expense = 1
@@ -75,8 +75,8 @@ def search(grid, init, goal, cost):
         x = back_x
         y = back_y
 
-    print np.array(expand)
+    print(np.array(expand))
     return policy
 
 
-print np.array(search(grid_map, start, end, expense))
+print(np.array(search(grid_map, start, end, expense)))

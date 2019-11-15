@@ -119,6 +119,7 @@ def get_a_star_search_path(grid, start_pos, end_pos, h_grid):
         y = back_y
         path.insert(0, [x, y])
 
+    # print np.array(policy)
     return path
 
 
@@ -136,4 +137,4 @@ def smooth(path, weight_data=0.5, weight_smooth=0.1, tolerance=0.000001):
     return newpath
 
 
-print np.array(search(grid_map, startPos, endPos))
+print(np.array(search(grid_map, startPos, endPos)))

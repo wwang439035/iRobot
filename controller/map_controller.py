@@ -1,4 +1,4 @@
-import time
+from render.ui import *
 
 
 def init_env(map_size):

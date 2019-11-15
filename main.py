@@ -15,6 +15,7 @@ def main():
     for _ in range(NUM_BOX):
         for action in ACTIONS:
             start_time = time.time()
+            current_time = start_time
             path_index = 0
 
             path = get_path(map_grid, robot_pos, goal_pos)

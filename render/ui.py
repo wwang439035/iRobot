@@ -108,6 +108,8 @@ def renderComplete():
 def setFramerate(rate):
     clock.tick(rate)
 
+def updateScreen():
+    pygame.display.update()
 
 while run:
     for event in pygame.event.get():

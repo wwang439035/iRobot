@@ -26,14 +26,14 @@ class Wall():
         while True:
             collided = False
             if isWide:
-                width = random.randint(WINDOW_WIDTH // 5, WINDOW_WIDTH // 2)
-                height = random.randint(WINDOW_WIDTH // 40, WINDOW_WIDTH // 10)
+                self.width = random.randint(WINDOW_WIDTH // 5, WINDOW_WIDTH // 2)
+                self.height = random.randint(WINDOW_WIDTH // 40, WINDOW_WIDTH // 10)
             else:
-                height = random.randint(WINDOW_WIDTH // 5, WINDOW_WIDTH // 2)
-                width = random.randint(WINDOW_WIDTH // 40, WINDOW_WIDTH // 10)
-            x = random.randint(32, WINDOW_WIDTH - width)
-            y = random.randint(32, WINDOW_HEIGHT - height)
-            self.rect = pygame.Rect(x, y, width, height)
+                self.height = random.randint(WINDOW_WIDTH // 5, WINDOW_WIDTH // 2)
+                self.width = random.randint(WINDOW_WIDTH // 40, WINDOW_WIDTH // 10)
+            self.x = random.randint(32, WINDOW_WIDTH - self.width)
+            self.y = random.randint(32, WINDOW_HEIGHT - self.height)
+            self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
             for object in objects:
                 if self.rect.colliderect(object.rect):
                     collided = True
@@ -56,13 +56,13 @@ class Character():
         win.blit(self.image, (self.x, self.y))
 
 
-def generateMap():
+def generateMap(walls):
     map = [['.' for i in range(WINDOW_WIDTH)] for j in range(WINDOW_HEIGHT)]
     for wall in walls:
         for x in range(wall.x - pandaImg.get_rect().size[0], wall.x + wall.width):
             for y in range(wall.y - pandaImg.get_rect().size[1], wall.y + wall.height):
                 map[y][x] = '#'
-    return map;
+    return map
 
 
 def renderPath(path):
@@ -108,7 +108,7 @@ def renderComplete():
 def setFramerate(rate):
     clock.tick(rate)
 
-
+'''
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

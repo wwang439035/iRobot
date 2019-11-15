@@ -1,6 +1,7 @@
 from controller.map_controller import *
 from controller.search_controller import *
 from render.ui import *
+import numpy as np
 import time
 
 
@@ -10,17 +11,20 @@ CPU_CYCLE = 1000
 
 def main():
     map_grid, robot, goal = init_env()
-    input("Press a key to start")
+    # input("Press a key to start")
 
     while True:
+        setFramerate(30)
+        '''
         time_step = 0
         start_time = time.time()
         current_time = start_time
         path_index = 0
-
+        print(np.array(map_grid))
         path = get_path(map_grid, [robot.x, robot.y], [goal.x, goal.y])
         render_path(path)
 
+        
         while current_time - start_time < MAP_CHANGE_DURATION and path_index < len(path):
             setFramerate(30)
             if time_step / CPU_CYCLE == 0:
@@ -34,6 +38,7 @@ def main():
             break
 
         map_grid, box_pos = change_map([robot, goal])
+        '''
 
 
 if __name__ == '__main__':

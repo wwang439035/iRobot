@@ -34,9 +34,9 @@ def search(grid, start_pos, end_pos):
 
     shortest_path = get_a_star_search_path(grid, start_pos, end_pos, h_grid)
     # print np.array(shortest_path)
-    smooth_shortest_path = smooth(shortest_path)
+    # smooth_shortest_path = smooth(shortest_path)
     # smooth_shortest_path = refine(smooth_shortest_path)
-    return smooth_shortest_path
+    return shortest_path
 
 
 def refine(path):

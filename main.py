@@ -4,8 +4,8 @@ import time
 
 MAP_SIZE = [800, 600]
 MAP_CHANGE_DURATION = 15
-ACTIONS = ['lift', 'down']
-NUM_BOX = 5
+ACTIONS = ['eat']
+NUM_BOX = 1
 
 
 def main():

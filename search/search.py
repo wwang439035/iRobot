@@ -29,7 +29,7 @@ delta = [[-1, 0],
 
 def search(grid, start_pos, end_pos):
     h_grid = get_heuristic_grid(grid)
-    print('Heuristic Grid:')
+    print('\nHeuristic Grid:')
     print(np.array(h_grid))
 
     shortest_path = get_a_star_search_path(grid, start_pos, end_pos, h_grid)
@@ -121,7 +121,7 @@ def get_a_star_search_path(grid, start_pos, end_pos, h_grid):
         y = back_y
         path.insert(0, [x, y])
 
-    print('Policy:')
+    print('\nPolicy:')
     print(np.array(policy))
     return path
 

@@ -56,7 +56,7 @@ class Character():
         win.blit(self.image, (self.x, self.y))
 
 
-def generateMap():
+def generateMap(walls):
     map = [['.' for i in range(WINDOW_WIDTH)] for j in range(WINDOW_HEIGHT)]
     for wall in walls:
         for x in range(wall.x - pandaImg.get_rect().size[0], wall.x + wall.width):

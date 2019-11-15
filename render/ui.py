@@ -57,15 +57,23 @@ class Character():
 def generateMap():
     map = [['.' for i in range(WINDOW_WIDTH)] for j in range(WINDOW_HEIGHT)]
     for wall in walls:
-        for x in range(wall.x, wall.x + wall.width):
-            for y in range(wall.y, wall.y + wall.height):
+        for x in range(wall.x - pandaImg.get_rect().size[0], wall.x + wall.width):
+            for y in range(wall.y - pandaImg.get_rect().size[0], wall.y + wall.height):
                 map[y][x] = '#'
     return map;
+
+def drawPath():
+    path = getPath()
+    for y, row in enumerate(path):
+        for x, col in enumerate(row):
+            if path[y][x] == '*'
+            pygame.draw.circle(win, (0, 0, 255), (x + pandaSize/2, y + pandaSize/2), 5)
 
 def mainDraw():
     win.blit(background, (0,0))
     for wall in walls:
         wall.draw(win)
+    drawPath()
     adultPanda.draw(win)
     apple.draw(win)
     pygame.display.update()

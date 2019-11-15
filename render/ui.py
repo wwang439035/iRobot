@@ -1,17 +1,22 @@
 import pygame
 import random
 from pprint import pprint
+from controller.map_controller import *
+from controller.search_controller import *
+from render.ui import *
+import numpy as np
+import time
 
 pygame.init()
-WINDOW_WIDTH = 1252
-WINDOW_HEIGHT = 834
+WINDOW_WIDTH = 300
+WINDOW_HEIGHT = 300
 pandaSize = 100
 appleSize = 70
-background = pygame.image.load('./resources/images/background.jpg')
+background = pygame.image.load('../resources/images/background.jpg')
 background = pygame.transform.scale2x(background)
-pandaImg = pygame.image.load('./resources/images/BabyPanda.png')
+pandaImg = pygame.image.load('../resources/images/BabyPanda.png')
 pandaImg = pygame.transform.scale(pandaImg, (pandaSize, pandaSize))
-appleImg = pygame.image.load('./resources/images/apple.png')
+appleImg = pygame.image.load('../resources/images/apple.png')
 appleImg = pygame.transform.scale(appleImg, (appleSize, appleSize))
 
 win = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -133,3 +138,54 @@ while run:
 
 pygame.quit()
 '''
+def init_env():
+    renderBackground()
+    panda = renderPanda((0, 0))
+    apple = renderApple((WINDOW_WIDTH - appleSize // 2, WINDOW_HEIGHT - appleSize // 2))
+    walls = changeMap([apple, panda])
+    map_grid = generateMap([])
+    return map_grid, panda, apple, walls
+
+
+def change_map(objects):
+    walls = changeMap(objects)
+    renderWalls(walls)
+    map_grid = generateMap(walls)
+    return map_grid
+
+
+def render_robot(robot_pos, goal_pos):
+    renderPanda(robot_pos)
+    renderApple(goal_pos)
+
+
+def render_path(path):
+    renderPath(path)
+
+
+def render_complete():
+    renderComplete()
+
+
+map_grid, robot, goal, walls = init_env()
+# input("Press a key to start")
+
+path_index = 0
+print(np.array(map_grid))
+path = get_path(map_grid, [robot.x, robot.y], [goal.x, goal.y])
+print(path)
+while True:
+    setFramerate(50)
+    renderBackground()
+    render_robot(path[path_index], [goal.x, goal.y])
+    renderWalls(walls)
+    render_path(path)
+
+    path_index += 1
+    print(path_index)
+
+    if path_index == len(path):
+        render_complete()
+        break
+
+    updateScreen()

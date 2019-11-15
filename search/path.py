@@ -27,7 +27,7 @@ delta = [[-1, 0],
          [0, 1]]
 
 
-def search(grid, start_pos, end_pos):
+def search_path(grid, start_pos, end_pos):
     h_grid = get_heuristic_grid(grid)
     print('\nHeuristic Grid:')
     print(np.array(h_grid))
@@ -140,4 +140,4 @@ def smooth(path, weight_data=0.5, weight_smooth=0.1, tolerance=0.000001):
     return newpath
 
 
-print(np.array(search(grid_map, startPos, endPos)))
+# print(np.array(search_path(grid_map, startPos, endPos)))

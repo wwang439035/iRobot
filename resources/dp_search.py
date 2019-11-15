@@ -1,9 +1,9 @@
 import numpy as np
 
 grid_map = [[0, 1, 0, 0, 0, 0],
-            [0, 1, 0, 0, 0, 0],
-            [0, 1, 0, 0, 0, 0],
-            [0, 1, 0, 0, 0, 0],
+            [0, 1, 0, 0, 1, 0],
+            [0, 1, 0, 0, 1, 0],
+            [0, 1, 0, 0, 1, 0],
             [0, 0, 0, 0, 1, 0]]
 end = [len(grid_map) - 1, len(grid_map[0]) - 1]
 expense = 1
@@ -41,8 +41,8 @@ def compute_value(grid, goal, cost):
                                 value[x][y] = v2
                                 policy[x][y] = delta_name[i]
                                 change = True
-    print np.array(value)
+    print(np.array(value))
     return policy
 
 
-print np.array(compute_value(grid_map, end, expense))
+print(np.array(compute_value(grid_map, end, expense)))

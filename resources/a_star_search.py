@@ -1,15 +1,15 @@
 import numpy as np
 
-grid_map = [[0, 1, 0, 0, 1, 0],
-        [0, 1, 0, 0, 0, 0],
-        [0, 1, 0, 1, 1, 0],
-        [0, 1, 0, 1, 0, 0],
-        [0, 0, 0, 1, 1, 0]]
+grid_map = [[0, 1, 0, 0, 0, 0],
+            [0, 1, 0, 0, 1, 0],
+            [0, 1, 0, 1, 1, 0],
+            [0, 1, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 0]]
 h_grid = [[9, 8, 7, 6, 5, 4],
-             [8, 7, 6, 5, 4, 3],
-             [7, 6, 5, 4, 3, 2],
-             [6, 5, 4, 3, 2, 1],
-             [5, 4, 3, 2, 1, 0]]
+          [8, 7, 6, 5, 4, 3],
+          [7, 6, 5, 4, 3, 2],
+          [6, 5, 4, 3, 2, 1],
+          [5, 4, 3, 2, 1, 0]]
 
 start = [0, 0]
 end = [len(grid_map) - 1, len(grid_map[0]) - 1]
@@ -81,8 +81,8 @@ def search(grid, init, goal, cost, heuristic):
         x = back_x
         y = back_y
 
-    print np.array(expand)
+    print(np.array(expand))
     return policy
 
 
-print np.array(search(grid_map, start, end, expense, h_grid))
+print(np.array(search(grid_map, start, end, expense, h_grid)))

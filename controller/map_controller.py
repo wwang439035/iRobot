@@ -1,32 +1,30 @@
-import time
+from render.ui import *
 
 
-def init_env(map_size):
-    robot_pos = []
-    box_pos = []
-    render_map()
-    return [], robot_pos, box_pos
+
+def init_env():
+    panda = renderPanda((0, 0))
+    apple = renderApple((WINDOW_WIDTH - appleSize // 2, WINDOW_HEIGHT - appleSize // 2))
+    walls = changeMap([apple, panda])
+    renderWalls(walls)
+    map_grid = generateMap()
+    return map_grid, [panda.x, panda.y], [apple.x, apple.y]
 
 
-def render_map():
-    pass
+def change_map(objects):
+    changeMap(objects)
+    map_grid = generateMap()
+    return map_grid
 
 
-def change_map(robot_pos):
-    return []
-
-
-def render_robot(robot_pos):
-    pass
+def render_robot(robot_pos, goal_pos):
+    renderPanda(robot_pos)
+    renderApple(goal_pos)
 
 
 def render_path(path):
-    pass
+    renderPath(path)
 
 
-def render_lift():
-    pass
-
-
-def render_down():
-    time.sleep(1)
+def render_complete():
+    renderComplete()

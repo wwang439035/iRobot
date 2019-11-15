@@ -29,7 +29,9 @@ delta = [[-1, 0],
 
 def search(grid, start_pos, end_pos):
     h_grid = get_heuristic_grid(grid)
-    # print np.array(h_grid)
+    print('Heuristic Grid:')
+    print(np.array(h_grid))
+
     shortest_path = get_a_star_search_path(grid, start_pos, end_pos, h_grid)
     # print np.array(shortest_path)
     smooth_shortest_path = smooth(shortest_path)
@@ -64,8 +66,8 @@ def get_a_star_search_path(grid, start_pos, end_pos, h_grid):
     closed = [[0 for col in range(width)] for row in range(height)]
     closed[start_pos[0]][start_pos[1]] = 1
 
-    # policy = [[' ' for row in range(width)] for col in range(height)]
-    # policy[height - 1][width - 1] = '*'
+    policy = [[' ' for row in range(width)] for col in range(height)]
+    policy[height - 1][width - 1] = '*'
 
     expand = [[-1 for col in range(width)] for row in range(height)]
     action = [[-1 for col in range(width)] for row in range(height)]
@@ -114,12 +116,13 @@ def get_a_star_search_path(grid, start_pos, end_pos, h_grid):
     while [x, y] != start_pos:
         back_x = x - delta[action[x][y]][0]
         back_y = y - delta[action[x][y]][1]
-        # policy[back_x][back_y] = delta_name[action[x][y]]
+        policy[back_x][back_y] = delta_name[action[x][y]]
         x = back_x
         y = back_y
         path.insert(0, [x, y])
 
-    # print np.array(policy)
+    print('Policy:')
+    print(np.array(policy))
     return path
 
 

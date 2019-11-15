@@ -12,12 +12,12 @@ endPos = [4, 5]
 
 
 def search(grid, start_pos, end_pos):
-    shortest_path = getShortestPath(grid, start_pos, end_pos)
+    shortest_path = get_shortest_path(grid, start_pos, end_pos)
     smooth_shortest_path = smooth(shortest_path)
     return smooth_shortest_path
 
 
-def getShortestPath(grid, start_pos, end_pos):
+def get_shortest_path(grid, start_pos, end_pos):
     path = []
     return path
 
@@ -36,4 +36,4 @@ def smooth(path, weight_data=0.5, weight_smooth=0.1, tolerance=0.000001):
     return newpath
 
 
-print np.array(search(grid_map, startPos, endPos))
+print(np.array(search(grid_map, startPos, endPos)))

@@ -14,8 +14,6 @@ pandaImg = pygame.transform.scale(pandaImg, (pandaSize, pandaSize))
 appleImg = pygame.image.load('../resources/images/apple.png')
 appleImg = pygame.transform.scale(appleImg, (appleSize, appleSize))
 
-
-
 win = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Panda Game")
 clock = pygame.time.Clock()
@@ -41,7 +39,6 @@ class Wall():
                     break
             if collided is False:
                 break
-
     def draw(self, win):
         pygame.draw.rect(win, (203, 65, 84), self.rect)
 
@@ -58,49 +55,63 @@ def generateMap():
     map = [['.' for i in range(WINDOW_WIDTH)] for j in range(WINDOW_HEIGHT)]
     for wall in walls:
         for x in range(wall.x - pandaImg.get_rect().size[0], wall.x + wall.width):
-            for y in range(wall.y - pandaImg.get_rect().size[0], wall.y + wall.height):
+            for y in range(wall.y - pandaImg.get_rect().size[1], wall.y + wall.height):
                 map[y][x] = '#'
     return map;
 
-def drawPath():
-    path = getPath()
-    for y, row in enumerate(path):
-        for x, col in enumerate(row):
-            if path[y][x] == '*'
-            pygame.draw.circle(win, (0, 0, 255), (x + pandaSize/2, y + pandaSize/2), 5)
+def renderPath(path):
+    for point in path:
+        pygame.draw.circle(win, (0, 0, 255), (point[0] + pandaSize//2, point[1] + pandaSize//2), 5)
 
-def mainDraw():
-    win.blit(background, (0,0))
+def changeMap(objects):
+    walls = []
+    for x in range(random.randint(4, 7)):
+        walls.append(Wall(objects))
+    return walls
+
+def renderPanda(pos):
+    adultPanda = Character(pandaImg, pos[0], pos[1])
+    adultPanda.draw(win)
+    return adultPanda
+
+def renderApple(pos):
+    apple = Character(appleImg, WINDOW_WIDTH - appleImg.get_rect().size[0] - 20, WINDOW_HEIGHT - appleImg.get_rect().size[1] - 20)
+    apple.draw(win)
+    return apple
+
+def renderWalls(walls):
     for wall in walls:
         wall.draw(win)
-    drawPath()
-    adultPanda.draw(win)
-    apple.draw(win)
-    pygame.display.update()
 
-adultPanda = Character(pandaImg, 0, 0)
-apple = Character(appleImg, WINDOW_WIDTH - appleImg.get_rect().size[0] - 20, WINDOW_HEIGHT - appleImg.get_rect().size[1] - 20)
-objects = [adultPanda, apple]
-walls = []
-for x in range(random.randint(4, 7)):
-    walls.append(Wall(objects))
+def renderBackground():
+    win.blit(background, (0,0))
+
+def renderComplete():
+    font = pygame.font.SysFont("comicsansms", 128)
+    text = font.render("Panda Got the Apple!!", True, (255,165,0))
+    win.blit(text, (WINDOW_WIDTH // 2 - text.get_width()//2, WINDOW_HEIGHT // 2 - text.get_height()//2))
+
+def setFramerate(rate):
+    clock.tick(rate)
+
 while run:
-    clock.tick(30)
-
+    setFramerate(30)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                walls.clear()
-                for x in range(random.randint(4, 7)):
-                    walls.append(Wall(objects))
-
+                changeMap()
     keys = pygame.key.get_pressed()
     if keys[pygame.K_ESCAPE]:
         run = False
 
-    mainDraw()
-
+    renderBackground()
+    apple = renderPanda((0, 0))
+    panda = renderApple((WINDOW_WIDTH - appleSize//2, WINDOW_HEIGHT - appleSize//2))
+    walls = changeMap([apple, panda])
+    renderWalls(walls)
+    renderComplete()
+    pygame.display.update()
 
 pygame.quit()

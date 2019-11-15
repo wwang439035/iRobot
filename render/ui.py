@@ -94,8 +94,8 @@ def renderComplete():
 def setFramerate(rate):
     clock.tick(rate)
 
+
 while run:
-    setFramerate(30)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -107,8 +107,8 @@ while run:
         run = False
 
     renderBackground()
-    apple = renderPanda((0, 0))
-    panda = renderApple((WINDOW_WIDTH - appleSize//2, WINDOW_HEIGHT - appleSize//2))
+    panda = renderPanda((0, 0))
+    apple = renderApple((WINDOW_WIDTH - appleSize//2, WINDOW_HEIGHT - appleSize//2))
     walls = changeMap([apple, panda])
     renderWalls(walls)
     renderComplete()
